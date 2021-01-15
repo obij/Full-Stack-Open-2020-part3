@@ -1,6 +1,7 @@
 const { request, response } = require('express')
 const express = require('express')
 const app = express()
+app.use(express.json())
 
 let persons = [
   {
@@ -58,6 +59,26 @@ app.delete('/api/persons/:id', (request, response) => {
   person = persons.filter(person => person.id !== id)
 
   response.status(204).end()
+})
+
+const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+
+}
+
+
+
+app.post('/api/persons', (request, response) => {
+  const ranId = getRandomInt(5, 100)
+
+  const person = request.body
+  person.id = ranId
+
+  persons = persons.concat(person)
+
+  response.json(person)
 })
 
 const PORT = 3001
