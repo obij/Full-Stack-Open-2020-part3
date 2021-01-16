@@ -3,6 +3,10 @@ const express = require('express')
 const app = express()
 app.use(express.json())
 
+var bodyParser = require('body-parser')//add this
+
+app.use(bodyParser())//add this before any route or before using req.body
+
 let persons = [
   {
       id: 1,
@@ -70,18 +74,50 @@ const getRandomInt = (min, max) => {
 
 
 
-app.post('/api/persons', (request, response) => {
-  const ranId = getRandomInt(5, 100)
 
-  const person = request.body
-  person.id = ranId
+//app.use(express.json({extended: false}));
 
-  persons = persons.concat(person)
+app.post('/api/persons', (request, response) =>{
+  const body= request.body;
+  //console.log(body, typeof body);
+  const dupName= persons.find(person => person.name === body.name)
+  //console.log(dupName);
 
-  response.json(person)
+
+  if(!body.name){
+    return response.status(400).json({
+      error: 'name missing'
+    })
+  }
+  
+ if(!body.number){
+    return response.status(400).json({
+      error: 'number missing'
+    })
+ }
+  
+ if(dupName){
+    return response.status(400).json({
+      error: 'Name already in phonebook'
+    })
+  }
+
+  const person= {
+    id: getRandomInt(5, 100),
+    name: body.name,
+    number: body.number
+  }
+
+  persons= persons.concat(person);
+  //console.log(pm.response.json())
+  response.json(note);
+  
+
 })
 
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
+
