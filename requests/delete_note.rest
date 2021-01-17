@@ -9,3 +9,6 @@ content-type: application/json
   "number": "543-789999971" 
   
  }
+
+###
+ GET http://localhost:3001/api/persons/
