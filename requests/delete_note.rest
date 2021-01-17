@@ -1,11 +1,11 @@
-DELETE http://localhost:3001/api/persons/86
+DELETE http://localhost:3001/api/persons/1
 
 ###
 POST http://localhost:3001/api/persons/ HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Arto Hellas",
+  "name": "Rocky Johnson",
   "number": "543-789999971" 
   
  }

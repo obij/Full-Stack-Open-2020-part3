@@ -1,11 +1,11 @@
 const { request, response } = require('express')
 const express = require('express')
+const morgan = require('morgan');
 const app = express()
 app.use(express.json())
 
-var bodyParser = require('body-parser')//add this
+app.use(morgan('tiny'));
 
-app.use(bodyParser())//add this before any route or before using req.body
 
 let persons = [
   {
@@ -110,7 +110,7 @@ app.post('/api/persons', (request, response) =>{
 
   persons= persons.concat(person);
   //console.log(pm.response.json())
-  response.json(note);
+  response.json(person);
   
 
 })
