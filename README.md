@@ -1,1 +1,1 @@
-https://morning-earth-10869.herokuapp.com/
+https://morning-earth-10869.herokuapp.com
