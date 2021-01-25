@@ -1,7 +1,7 @@
-DELETE https://morning-earth-10869.herokuapp.com/api/persons/1
+DELETE http://localhost:3001/api/persons/1
 
 ###
-POST https://morning-earth-10869.herokuapp.com/api/persons/ HTTP/1.1
+POST http://localhost:3001/api/persons/ HTTP/1.1
 content-type: application/json
 
 {
@@ -11,4 +11,6 @@ content-type: application/json
  }
 
 ###
- GET https://morning-earth-10869.herokuapp.com/api/persons/
+ GET http://localhost:3001/api/persons/
+
+ 

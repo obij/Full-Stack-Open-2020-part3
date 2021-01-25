@@ -96,42 +96,23 @@ const getRandomInt = (min, max) => {
 
 //app.use(express.json({extended: false}));
 
-app.post('/api/persons', (request, response) =>{
-  const body= request.body;
-  //console.log(body, typeof body);
-  const dupName= persons.find(person => person.name === body.name)
-  //console.log(dupName);
 
 
-  if(!body.name){
-    return response.status(400).json({
-      error: 'name missing'
-    })
-  }
-  
- if(!body.number){
-    return response.status(400).json({
-      error: 'number missing'
-    })
- }
-  
- if(dupName){
-    return response.status(400).json({
-      error: 'Name already in phonebook'
-    })
+app.post('/api/persons', (request, response) => {
+  const body= request.body
+
+  if(body.name === undefined){
+    return response.status(400).json({error: 'name missing'})
   }
 
-  const person= {
-    id: getRandomInt(5, 100),
+  const person= new Person({
     name: body.name,
     number: body.number
-  }
+  })
 
-  persons= persons.concat(person);
-  //console.log(pm.response.json())
-  response.json(person);
-  
-
+  person.save().then(savedPerson =>{
+    response.json(savedPerson)
+  })
 })
 
 
