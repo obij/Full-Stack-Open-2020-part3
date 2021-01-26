@@ -22,3 +22,10 @@ content-type: application/json
   "number": "777-777777" 
   
  }
+
+###
+GET http://localhost:3001/api/persons/600f42a6b59db31ce80cd937
+
+
+###
+GET http://localhost:3001/info/

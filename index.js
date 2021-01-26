@@ -55,27 +55,37 @@ let persons = [
   //response.json(persons)
 //})
 
+
+
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
     response.json(persons)
   })
 })
 
-app.get('/info', (request, response ) => {
-  const num= persons.length;
-  response.send('<p>Phonebook has info for ' + num + ' people</p><p>' + new Date + '</p>')
+
+app.get('/info', (request, response) => {
+  const date= new Date
+  Person.find({}).then(persons => {
+    const num= persons.length
+    response.send(`<p>Phonebook has info for ${num} people</p><p> ${date} </p>`)
+  })
 })
 
-app.get('/api/persons/:id', (request, response) => {
-  const id= Number(request.params.id)
-  const person= persons.find(person => person.id === id)
-
-  if(person){
-    response.json(person)
-  }else{
-    response.status(404).end()
-  }
+app.get('/api/persons/:id', (request, response, next) => {
+  console.log(request.params.id)
+  Person.findById(request.params.id)
+        .then(person =>{
+          if(person){
+            response.json(person)
+          }else{
+            response.status(404).end()
+          }
+        })
+        .catch(error => next(error))
 })
+
+
 
 
 
