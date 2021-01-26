@@ -1,16 +1,24 @@
-DELETE http://localhost:3001/api/persons/600f42cfb59db31ce80cd938
+DELETE http://localhost:3001/api/persons/01382bbb3a33d04c00b18
 
 ###
 POST http://localhost:3001/api/persons/ HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Rocky Johnson",
-  "number": "543-789999971" 
+  "name": "Arto Vihavainen",
+  "number": "444-654333" 
   
  }
 
 ###
  GET http://localhost:3001/api/persons/
 
- 
+###
+PUT http://localhost:3001/api/persons/600b602753d64837f065156b 
+content-type: application/json
+
+ {
+  "name": "Arto Vihavainen",
+  "number": "777-777777" 
+  
+ }
